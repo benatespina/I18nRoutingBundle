@@ -11,6 +11,7 @@
 
 namespace Tests\BenatEspina\LanguageSelectorBundle;
 
+use BenatEspina\LanguageSelectorBundle\BenatEspinaLanguageSelectorBundle;
 use JMS\I18nRoutingBundle\JMSI18nRoutingBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
@@ -31,12 +32,61 @@ class AppKernel extends Kernel
     const DEFAULT_LOCALE = 'en';
     const LOCALES = [self::DEFAULT_LOCALE, 'es'];
     const IN_MEMORY_DB = [
-        ['id' => 1, 'title' => 'Homepage', 'slug' => '', 'locale' => 'en', 'template' => 'home'],
-        ['id' => 2, 'title' => 'Inicio', 'slug' => '', 'locale' => 'es', 'template' => 'home'],
-        ['id' => 3, 'title' => 'Contact', 'slug' => 'contact', 'locale' => 'en', 'template' => 'contact'],
-        ['id' => 4, 'title' => 'Contacto', 'slug' => 'contacto', 'locale' => 'es', 'template' => 'contact'],
-        ['id' => 5, 'title' => 'About Us', 'slug' => 'about-us', 'locale' => 'en', 'template' => 'about_us'],
-        ['id' => 6, 'title' => 'Sobre Nosotros', 'slug' => 'sobre-nosotros', 'locale' => 'es', 'template' => 'about_us'],
+        [
+            'id'           => 1,
+            'translations' => [
+                [
+                    'id'       => 1,
+                    'title'    => 'Homepage',
+                    'slug'     => '',
+                    'locale'   => 'en',
+                    'template' => 'home',
+                ],
+                [
+                    'id'       => 2,
+                    'title'    => 'Inicio',
+                    'slug'     => '',
+                    'locale'   => 'es',
+                    'template' => 'home',
+                ],
+            ],
+        ], [
+            'id'           => 2,
+            'translations' => [
+                [
+                    'id'       => 3,
+                    'title'    => 'Contact',
+                    'slug'     => 'contact',
+                    'locale'   => 'en',
+                    'template' => 'contact',
+                ],
+                [
+                    'id'       => 4,
+                    'title'    => 'Contacto',
+                    'slug'     => 'contacto',
+                    'locale'   => 'es',
+                    'template' => 'contact',
+                ],
+            ],
+        ], [
+            'id'           => 2,
+            'translations' => [
+                [
+                    'id'       => 5,
+                    'title'    => 'About Us',
+                    'slug'     => 'about-us',
+                    'locale'   => 'en',
+                    'template' => 'about_us',
+                ],
+                [
+                    'id'       => 6,
+                    'title'    => 'Sobre Nosotros',
+                    'slug'     => 'sobre-nosotros',
+                    'locale'   => 'es',
+                    'template' => 'about_us',
+                ],
+            ],
+        ],
     ];
 
     use MicroKernelTrait;
@@ -44,6 +94,7 @@ class AppKernel extends Kernel
     public function registerBundles()
     {
         return [
+            new BenatEspinaLanguageSelectorBundle(),
             new FrameworkBundle(),
             new JMSI18nRoutingBundle(),
             new TwigBundle(),
@@ -111,9 +162,14 @@ class AppKernel extends Kernel
     {
         $result = null;
         foreach (self::IN_MEMORY_DB as $el) {
-            if ($slug === $el['slug'] && $locale === $el['locale']) {
-                $result = $el;
-                break;
+            if (!isset($el['translations'])) {
+                throw new \LogicException('Any translatable resource must have "translations"');
+            }
+            foreach ($el['translations'] as $translation) {
+                if ($slug === $translation['slug'] && $locale === $translation['locale']) {
+                    $result = $translation;
+                    break;
+                }
             }
         }
 

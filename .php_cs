@@ -27,6 +27,7 @@ return Config::create()
     ->setFinder(
         Finder::create()
             ->in([
+                __DIR__ . '/src',
                 __DIR__ . '/tests/Application/app',
                 __DIR__ . '/tests/Application/bin',
                 __DIR__ . '/tests/Application/web',

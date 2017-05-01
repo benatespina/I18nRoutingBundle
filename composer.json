@@ -30,12 +30,18 @@
         "symfony/templating": "^3.2",
         "symfony/translation": "^3.2",
         "symfony/twig-bundle": "^3.2",
+        "symfony/var-dumper": "^3.2",
         "symfony/yaml": "^3.2"
     },
     "scripts": {
         "cs": [
             "php-cs-fixer fix --config=.php_cs"
         ]
+    },
+    "autoload": {
+        "psr-4": {
+            "BenatEspina\\LanguageSelectorBundle\\": "src/BenatEspina/LanguageSelectorBundle/"
+        }
     },
     "autoload-dev": {
         "psr-4": {

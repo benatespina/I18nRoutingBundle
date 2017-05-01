@@ -16,12 +16,12 @@
 <body>
 <ul class="language-selector">
     <li>
-        <a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'en'})) }}">
+        <a href="{{ translatable_path(app.request.get('_route'), app.request.get('_route_params'), 'en') }}">
             {{ 'languages.english'|trans }}
         </a>
     </li>
     <li>
-        <a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'es'})) }}">
+        <a href="{{ translatable_path(app.request.get('_route'), app.request.get('_route_params'), 'es') }}">
             {{ 'languages.spanish'|trans }}
         </a>
     </li>
@@ -30,7 +30,6 @@
 <div class="locale-resolver">
     {{ 'your_current_locale_is'|trans }} "<strong>{{ app.request.locale }}</strong>"
 </div>
-
 
 <ul class="links">
     <li>
