@@ -1,0 +1,19 @@
+# This file is part of the Language Selector bundle.
+#
+# (c) Beñat Espiña <benatespina@gmail.com>
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+languages:
+    english: Inglés
+    spanish: Español
+links:
+    homepage: Inicio
+    about_us: Sobre nosotros
+    contact: Contacto
+slugs:
+    about_us: sobre-nosotros
+    contact: contacto
+title: Aplicación de testeo
+your_current_locale_is: Tu locale actual es

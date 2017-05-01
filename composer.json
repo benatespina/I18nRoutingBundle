@@ -1,0 +1,45 @@
+{
+    "name": "benatespina/language-selector-bundle",
+    "description": "Bundle that provides an abstraction layer over JMSI18nRoutingBundle to improve language switcher",
+    "type": "symfony-bundle",
+    "keywords": [
+        "locale",
+        "language-selector",
+        "language-switcher",
+        "bundle",
+        "symfony",
+        "jms-i18n-routing-bundle"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "benatespina",
+            "email": "benatespina@gmail.com",
+            "homepage": "http://benatespina.com"
+        }
+    ],
+    "require": {
+        "php": "^7.0"
+    },
+    "require-dev": {
+        "jms/i18n-routing-bundle": "^2.0",
+        "friendsofphp/php-cs-fixer": "^2.3",
+        "symfony/asset": "^3.2",
+        "symfony/console": "^3.2",
+        "symfony/framework-bundle": "^3.2",
+        "symfony/templating": "^3.2",
+        "symfony/translation": "^3.2",
+        "symfony/twig-bundle": "^3.2",
+        "symfony/yaml": "^3.2"
+    },
+    "scripts": {
+        "cs": [
+            "php-cs-fixer fix --config=.php_cs"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\BenatEspina\\LanguageSelectorBundle\\": "tests/Application/app/"
+        }
+    }
+}
