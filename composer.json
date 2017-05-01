@@ -45,7 +45,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\BenatEspina\\LanguageSelectorBundle\\": "tests/Application/app/"
+            "Tests\\BenatEspina\\LanguageSelectorBundle\\": "tests/Application/app/",
+            "Tests\\BenatEspina\\LanguageSelectorBundle\\Resolver\\": "tests/Application/src/Resolver/"
         }
     }
 }

@@ -12,17 +12,20 @@
 namespace Tests\BenatEspina\LanguageSelectorBundle;
 
 use BenatEspina\LanguageSelectorBundle\BenatEspinaLanguageSelectorBundle;
+use BenatEspina\LanguageSelectorBundle\Repository\InMemoryResourceRepository;
 use JMS\I18nRoutingBundle\JMSI18nRoutingBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Bundle\TwigBundle\TwigBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Routing\RouteCollectionBuilder;
+use Tests\BenatEspina\LanguageSelectorBundle\Resolver\MyParametersResolver;
 
 /**
  * @author Beñat Espiña <benatespina@gmail.com>
@@ -113,6 +116,28 @@ class AppKernel extends Kernel
 
     protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader)
     {
+        $container->setDefinition(
+            'benat_espina_language_selector.repository.in_memory_resource_repository',
+            new Definition(
+                InMemoryResourceRepository::class,
+                [
+                    self::IN_MEMORY_DB,
+                ]
+            )
+        );
+        $container->setDefinition(
+            'app.resolver.my_parameters_resolver',
+            new Definition(
+                MyParametersResolver::class,
+                [
+                    $container->getDefinition(
+                        'benat_espina_language_selector.repository.in_memory_resource_repository'
+                    ),
+                ]
+            )
+        );
+
+
         $container->loadFromExtension('framework', [
             'secret'     => 'sd87cb6cb49c248cn3cnn439cn498ds0210sad2',
             'templating' => [
@@ -143,9 +168,13 @@ class AppKernel extends Kernel
 
     public function pageAction(Request $request, $slug = '')
     {
-        $locale = $request->getLocale();
-        $page = $this->find($locale, $slug);
+        $repository = $this->getContainer()->get(
+            'benat_espina_language_selector.repository.in_memory_resource_repository'
+        );
         $twig = $this->getContainer()->get('twig');
+
+        $locale = $request->getLocale();
+        $page = $repository->getTranslationBy($locale, ['slug' => $slug]);
 
         if (null === $page) {
             throw new NotFoundHttpException();
@@ -156,23 +185,5 @@ class AppKernel extends Kernel
                 'page' => $page,
             ])
         );
-    }
-
-    private function find($locale, $slug)
-    {
-        $result = null;
-        foreach (self::IN_MEMORY_DB as $el) {
-            if (!isset($el['translations'])) {
-                throw new \LogicException('Any translatable resource must have "translations"');
-            }
-            foreach ($el['translations'] as $translation) {
-                if ($slug === $translation['slug'] && $locale === $translation['locale']) {
-                    $result = $translation;
-                    break;
-                }
-            }
-        }
-
-        return $result;
     }
 }

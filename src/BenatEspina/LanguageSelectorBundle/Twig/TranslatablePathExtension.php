@@ -11,10 +11,9 @@
 
 namespace BenatEspina\LanguageSelectorBundle\Twig;
 
+use BenatEspina\LanguageSelectorBundle\Resolver\ParametersResolver;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Tests\BenatEspina\LanguageSelectorBundle\AppKernel;
 
 /**
  * @author Beñat Espiña <benatespina@gmail.com>
@@ -23,11 +22,16 @@ class TranslatablePathExtension extends \Twig_Extension
 {
     private $requestStack;
     private $urlGenerator;
+    private $parametersResolver;
 
-    public function __construct(RequestStack $requestStack, UrlGeneratorInterface $urlGenerator)
-    {
+    public function __construct(
+        RequestStack $requestStack,
+        UrlGeneratorInterface $urlGenerator,
+        ParametersResolver $parametersResolver
+    ) {
         $this->requestStack = $requestStack;
         $this->urlGenerator = $urlGenerator;
+        $this->parametersResolver = $parametersResolver;
     }
 
     public function getFunctions()
@@ -40,22 +44,9 @@ class TranslatablePathExtension extends \Twig_Extension
     public function path($name, $parameters = [], $newLocale, $relative = false)
     {
         $locale = $this->requestStack->getMasterRequest()->getLocale();
-        $slug = isset($parameters['slug']) ? $parameters['slug'] : '';
-
-        $page = $this->find($locale, $slug);
-        if (null === $page) {
-            throw new NotFoundHttpException();
-        }
-
-        if ($slug) {
-            foreach ($page['translations'] as $translation) {
-                if ($translation['locale'] === $newLocale) {
-                    $parameters['slug'] = $translation['slug'];
-                    break;
-                }
-            }
-        }
         $parameters['_locale'] = $newLocale;
+
+        $this->parametersResolver->resolve($locale, $newLocale, $parameters);
 
         return $this->urlGenerator->generate(
             $name,
@@ -64,23 +55,5 @@ class TranslatablePathExtension extends \Twig_Extension
                 ? UrlGeneratorInterface::RELATIVE_PATH
                 : UrlGeneratorInterface::ABSOLUTE_PATH
         );
-    }
-
-    private function find($locale, $slug)
-    {
-        $result = null;
-        foreach (AppKernel::IN_MEMORY_DB as $el) {
-            if (!isset($el['translations'])) {
-                throw new \LogicException('Any translatable resource must have "translations"');
-            }
-            foreach ($el['translations'] as $translation) {
-                if ($slug === $translation['slug'] && $locale === $translation['locale']) {
-                    $result = $el;
-                    break;
-                }
-            }
-        }
-
-        return $result;
     }
 }

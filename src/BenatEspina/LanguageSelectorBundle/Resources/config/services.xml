@@ -11,6 +11,7 @@
         >
             <argument type="service" id="request_stack"/>
             <argument type="service" id="router"/>
+            <argument type="service" id="app.resolver.my_parameters_resolver"/>
             <tag name="twig.extension"/>
         </service>
     </services>
