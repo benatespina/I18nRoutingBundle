@@ -1,11 +1,11 @@
 {
-    "name": "benatespina/language-selector-bundle",
-    "description": "Bundle that provides an abstraction layer over JMSI18nRoutingBundle to improve language switcher",
+    "name": "benatespina/i18n-routing-bundle",
+    "description": "Bundle that provides an abstraction layer over JMSI18nRoutingBundle to improve some features",
     "type": "symfony-bundle",
     "keywords": [
         "locale",
-        "language-selector",
-        "language-switcher",
+        "i18n",
+        "routing",
         "bundle",
         "symfony",
         "jms-i18n-routing-bundle"
@@ -19,14 +19,14 @@
         }
     ],
     "require": {
-        "php": "^7.0"
+        "php": "^7.0",
+        "jms/i18n-routing-bundle": "^2.0",
+        "symfony/framework-bundle": "^3.0"
     },
     "require-dev": {
-        "jms/i18n-routing-bundle": "^2.0",
         "friendsofphp/php-cs-fixer": "^2.3",
         "symfony/asset": "^3.2",
         "symfony/console": "^3.2",
-        "symfony/framework-bundle": "^3.2",
         "symfony/templating": "^3.2",
         "symfony/translation": "^3.2",
         "symfony/twig-bundle": "^3.2",
@@ -40,13 +40,14 @@
     },
     "autoload": {
         "psr-4": {
-            "BenatEspina\\LanguageSelectorBundle\\": "src/BenatEspina/LanguageSelectorBundle/"
+            "BenatEspina\\I18nRoutingBundle\\": "src/BenatEspina/I18nRoutingBundle/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\BenatEspina\\LanguageSelectorBundle\\": "tests/Application/app/",
-            "Tests\\BenatEspina\\LanguageSelectorBundle\\Resolver\\": "tests/Application/src/Resolver/"
+            "Tests\\BenatEspina\\I18nRoutingBundle\\": "tests/Application/app/",
+            "Tests\\BenatEspina\\I18nRoutingBundle\\Resolver\\": "tests/Application/src/Resolver/",
+            "Tests\\BenatEspina\\I18nRoutingBundle\\Repository\\": "tests/Application/src/Repository/"
         }
     }
 }

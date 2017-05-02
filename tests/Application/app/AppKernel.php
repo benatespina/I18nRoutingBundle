@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Language Selector Bundle.
+ * This file is part of the I18n Routing Bundle.
  *
  * (c) Beñat Espiña <benatespina@gmail.com>
  *
@@ -9,10 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Tests\BenatEspina\LanguageSelectorBundle;
+namespace Tests\BenatEspina\I18nRoutingBundle;
 
-use BenatEspina\LanguageSelectorBundle\BenatEspinaLanguageSelectorBundle;
-use BenatEspina\LanguageSelectorBundle\Repository\InMemoryResourceRepository;
+use BenatEspina\I18nRoutingBundle\BenatEspinaI18nRoutingBundle;
 use JMS\I18nRoutingBundle\JMSI18nRoutingBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
@@ -25,7 +24,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Routing\RouteCollectionBuilder;
-use Tests\BenatEspina\LanguageSelectorBundle\Resolver\MyParametersResolver;
+use Tests\BenatEspina\I18nRoutingBundle\Repository\InMemoryResourceRepository;
+use Tests\BenatEspina\I18nRoutingBundle\Resolver\MyParametersResolver;
 
 /**
  * @author Beñat Espiña <benatespina@gmail.com>
@@ -97,7 +97,7 @@ class AppKernel extends Kernel
     public function registerBundles()
     {
         return [
-            new BenatEspinaLanguageSelectorBundle(),
+            new BenatEspinaI18nRoutingBundle(),
             new FrameworkBundle(),
             new JMSI18nRoutingBundle(),
             new TwigBundle(),
@@ -117,7 +117,7 @@ class AppKernel extends Kernel
     protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader)
     {
         $container->setDefinition(
-            'benat_espina_language_selector.repository.in_memory_resource_repository',
+            'app.repository.in_memory_resource_repository',
             new Definition(
                 InMemoryResourceRepository::class,
                 [
@@ -131,7 +131,7 @@ class AppKernel extends Kernel
                 MyParametersResolver::class,
                 [
                     $container->getDefinition(
-                        'benat_espina_language_selector.repository.in_memory_resource_repository'
+                        'app.repository.in_memory_resource_repository'
                     ),
                 ]
             )
@@ -168,9 +168,7 @@ class AppKernel extends Kernel
 
     public function pageAction(Request $request, $slug = '')
     {
-        $repository = $this->getContainer()->get(
-            'benat_espina_language_selector.repository.in_memory_resource_repository'
-        );
+        $repository = $this->getContainer()->get('app.repository.in_memory_resource_repository');
         $twig = $this->getContainer()->get('twig');
 
         $locale = $request->getLocale();

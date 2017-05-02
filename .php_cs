@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Language Selector bundle.
+ * This file is part of the I18n Routing bundle.
  *
  * (c) Beñat Espiña <benatespina@gmail.com>
  *
@@ -14,7 +14,7 @@ use PhpCsFixer\Finder;
 use PhpCsFixer\Fixer\Comment\HeaderCommentFixer;
 
 $header = <<<'EOF'
-This file is part of the Language Selector Bundle.
+This file is part of the I18n Routing Bundle.
 
 (c) Beñat Espiña <benatespina@gmail.com>
 

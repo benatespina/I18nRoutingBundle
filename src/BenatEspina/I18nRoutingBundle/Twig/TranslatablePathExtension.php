@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Language Selector Bundle.
+ * This file is part of the I18n Routing Bundle.
  *
  * (c) Beñat Espiña <benatespina@gmail.com>
  *
@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace BenatEspina\LanguageSelectorBundle\Twig;
+namespace BenatEspina\I18nRoutingBundle\Twig;
 
-use BenatEspina\LanguageSelectorBundle\Resolver\ParametersResolver;
+use BenatEspina\I18nRoutingBundle\Resolver\ParametersResolver;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
@@ -37,13 +37,17 @@ class TranslatablePathExtension extends \Twig_Extension
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction('translatable_path', [$this, 'path']),
+            new \Twig_SimpleFunction('current_path_translation', [$this, 'currentPathTranslation']),
         ];
     }
 
-    public function path($name, $parameters = [], $newLocale, $relative = false)
+    public function currentPathTranslation($newLocale, $relative = false)
     {
-        $locale = $this->requestStack->getMasterRequest()->getLocale();
+        $request = $this->requestStack->getMasterRequest();
+
+        $locale = $request->getLocale();
+        $name = $request->get('_route');
+        $parameters = $request->get('_route_params');
         $parameters['_locale'] = $newLocale;
 
         $this->parametersResolver->resolve($locale, $newLocale, $parameters);

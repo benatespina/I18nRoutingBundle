@@ -1,20 +1,20 @@
-# BenatEspinaLanguageSelectorBundle
-> Bundle that provides an abstraction layer over [JMSI18nRoutingBundle][1] to improve language switcher
+# BenatEspinaI18nRoutingBundle
+> Bundle that provides an abstraction layer over [JMSI18nRoutingBundle][1] to improve some features
 
 SensioLabsInsight *TODO
-[![Build Status](https://travis-ci.org/benatespina/LanguageSelectorBundle.svg?branch=master)](https://travis-ci.org/benatespina/LanguageSelectorBundle)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/benatespina/LanguageSelectorBundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/benatespina/LanguageSelectorBundle/?branch=master)
-[![Total Downloads](https://poser.pugx.org/benatespina/language-selector-bundle/downloads)](https://packagist.org/packages/benatespina/language-selector-bundle)
-[![Latest Stable Version](https://poser.pugx.org/benatespina/language-selector-bundle/v/stable.svg)](https://packagist.org/packages/benatespina/language-selector-bundle)
-[![Latest Unstable Version](https://poser.pugx.org/benatespina/language-selector-bundle/v/unstable.svg)](https://packagist.org/packages/benatespina/language-selector-bundle)
+[![Build Status](https://travis-ci.org/benatespina/I18nRoutingBundle.svg?branch=master)](https://travis-ci.org/benatespina/I18nRoutingBundle)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/benatespina/I18nRoutingBundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/benatespina/I18nRoutingBundle/?branch=master)
+[![Total Downloads](https://poser.pugx.org/benatespina/i18n-routing-bundle/downloads)](https://packagist.org/packages/benatespina/i18n-routing-bundle)
+[![Latest Stable Version](https://poser.pugx.org/benatespina/i18n-routing-bundle/v/stable.svg)](https://packagist.org/packages/benatespina/i18n-routing-bundle)
+[![Latest Unstable Version](https://poser.pugx.org/benatespina/i18n-routing-bundle/v/unstable.svg)](https://packagist.org/packages/benatespina/i18n-routing-bundle)
 
 ## Requirements
 PHP >= 7.0
 
 ## Installation
-The easiest way to install this component is using [Composer][2]
+The easiest way to install this bundle is using [Composer][2]
 ```bash
-$ composer require benatespina/language-selector-bundle
+$ composer require benatespina/i18n-routing-bundle
 ```
 
 ## Getting started
@@ -47,7 +47,7 @@ This bundle is created by:
 **@benatespina** - [benatespina@gmail.com](mailto:benatespina@gmail.com)
 
 ## Licensing Options
-[![License](https://poser.pugx.org/benatespina/language-selector-bundle/license.svg)](https://github.com/benatespina/LanguageSelectorBundle/blob/master/LICENSE)
+[![License](https://poser.pugx.org/benatespina/i18n-routing-bundle/license.svg)](https://github.com/benatespina/I18nRoutingBundle/blob/master/LICENSE)
 
 [1]: http://jmsyst.com/bundles/JMSI18nRoutingBundle
 [2]: http://getcomposer.org

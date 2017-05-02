@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Language Selector Bundle.
+ * This file is part of the I18n Routing Bundle.
  *
  * (c) Beñat Espiña <benatespina@gmail.com>
  *
@@ -9,12 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace BenatEspina\LanguageSelectorBundle\Resolver;
+namespace BenatEspina\I18nRoutingBundle;
+
+use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
  * @author Beñat Espiña <benatespina@gmail.com>
  */
-interface ParametersResolver
+class BenatEspinaI18nRoutingBundle extends Bundle
 {
-    public function resolve($fromLocale, $toLocale, array &$parameters);
 }

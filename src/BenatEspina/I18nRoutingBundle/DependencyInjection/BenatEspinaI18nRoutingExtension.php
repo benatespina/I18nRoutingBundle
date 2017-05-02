@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Language Selector Bundle.
+ * This file is part of the I18n Routing Bundle.
  *
  * (c) Beñat Espiña <benatespina@gmail.com>
  *
@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace BenatEspina\LanguageSelectorBundle\DependencyInjection;
+namespace BenatEspina\I18nRoutingBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -19,7 +19,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 /**
  * @author Beñat Espiña <benatespina@gmail.com>
  */
-class BenatEspinaLanguageSelectorExtension extends Extension
+class BenatEspinaI18nRoutingExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container)
     {

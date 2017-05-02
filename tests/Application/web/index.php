@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Language Selector Bundle.
+ * This file is part of the I18n Routing Bundle.
  *
  * (c) Beñat Espiña <benatespina@gmail.com>
  *
@@ -10,7 +10,7 @@
  */
 
 use Symfony\Component\HttpFoundation\Request;
-use Tests\BenatEspina\LanguageSelectorBundle\AppKernel;
+use Tests\BenatEspina\I18nRoutingBundle\AppKernel;
 
 require_once __DIR__ . '/../../../vendor/autoload.php';
 

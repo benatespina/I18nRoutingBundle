@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Language Selector Bundle.
+ * This file is part of the I18n Routing Bundle.
  *
  * (c) Beñat Espiña <benatespina@gmail.com>
  *
@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace BenatEspina\LanguageSelectorBundle\Repository;
+namespace Tests\BenatEspina\I18nRoutingBundle\Repository;
 
 /**
  * @author Beñat Espiña <benatespina@gmail.com>

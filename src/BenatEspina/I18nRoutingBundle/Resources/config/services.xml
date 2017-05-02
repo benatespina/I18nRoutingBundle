@@ -6,8 +6,8 @@
 
     <services>
         <service
-                id="benat_espina_language_selector.twig.translatable_path_extension"
-                class="BenatEspina\LanguageSelectorBundle\Twig\TranslatablePathExtension"
+                id="benat_espina_i18n_routing.twig.translatable_path_extension"
+                class="BenatEspina\I18nRoutingBundle\Twig\TranslatablePathExtension"
         >
             <argument type="service" id="request_stack"/>
             <argument type="service" id="router"/>
