@@ -135,8 +135,7 @@ class AppKernel extends Kernel
                     ),
                 ]
             )
-        );
-
+        )->addTag('benat_espina_i18n_routing.parameters_resolver', ['alias' => 'my_app']);
 
         $container->loadFromExtension('framework', [
             'secret'     => 'sd87cb6cb49c248cn3cnn439cn498ds0210sad2',

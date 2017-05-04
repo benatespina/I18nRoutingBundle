@@ -1,0 +1,48 @@
+<?php
+
+/*
+ * This file is part of the I18n Routing bundle.
+ *
+ * (c) Beñat Espiña <benatespina@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+use PhpCsFixer\Config;
+use PhpCsFixer\Finder;
+use PhpCsFixer\Fixer\Comment\HeaderCommentFixer;
+
+$header = <<<'EOF'
+This file is part of the I18n Routing Bundle.
+
+(c) Beñat Espiña <benatespina@gmail.com>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+EOF;
+
+return Config::create()
+    ->setRiskyAllowed(true)
+    ->setFinder(
+        Finder::create()
+            ->in(__DIR__ . '/spec')
+    )
+    ->setRules([
+        '@Symfony'                              => true,
+        '@Symfony:risky'                        => true,
+        'binary_operator_spaces'                => [
+            'align_double_arrow' => true,
+        ],
+        'concat_space'                          => ['spacing' => 'one'],
+        'header_comment'                        => [
+            'header'      => $header,
+            'commentType' => HeaderCommentFixer::HEADER_COMMENT,
+        ],
+        'no_unreachable_default_argument_value' => false,
+        'ordered_imports'                       => true,
+        'phpdoc_order'                          => true,
+        'phpdoc_annotation_without_dot'         => false,
+        'strict_param'                          => true,
+        'visibility_required'                   => false,
+    ]);

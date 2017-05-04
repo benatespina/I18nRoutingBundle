@@ -11,27 +11,28 @@
 
 namespace BenatEspina\I18nRoutingBundle\Twig;
 
-use BenatEspina\I18nRoutingBundle\Resolver\ParametersResolver;
+use BenatEspina\I18nRoutingBundle\Resolver\ParametersResolverDoesNotExist;
+use BenatEspina\I18nRoutingBundle\Resolver\ParametersResolverRegistry;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
  * @author Beñat Espiña <benatespina@gmail.com>
  */
-class TranslatablePathExtension extends \Twig_Extension
+class CurrentPathTranslationExtension extends \Twig_Extension
 {
     private $requestStack;
     private $urlGenerator;
-    private $parametersResolver;
+    private $parametersResolverRegistry;
 
     public function __construct(
         RequestStack $requestStack,
         UrlGeneratorInterface $urlGenerator,
-        ParametersResolver $parametersResolver
+        ParametersResolverRegistry $parametersResolverRegistry
     ) {
         $this->requestStack = $requestStack;
         $this->urlGenerator = $urlGenerator;
-        $this->parametersResolver = $parametersResolver;
+        $this->parametersResolverRegistry = $parametersResolverRegistry;
     }
 
     public function getFunctions()
@@ -41,7 +42,7 @@ class TranslatablePathExtension extends \Twig_Extension
         ];
     }
 
-    public function currentPathTranslation($newLocale, $relative = false)
+    public function currentPathTranslation($newLocale, $parametersResolverAlias = null, $relative = false)
     {
         $request = $this->requestStack->getMasterRequest();
 
@@ -50,7 +51,7 @@ class TranslatablePathExtension extends \Twig_Extension
         $parameters = $request->get('_route_params');
         $parameters['_locale'] = $newLocale;
 
-        $this->parametersResolver->resolve($locale, $newLocale, $parameters);
+        $this->parametersResolver($parametersResolverAlias)->resolve($locale, $newLocale, $parameters);
 
         return $this->urlGenerator->generate(
             $name,
@@ -59,5 +60,17 @@ class TranslatablePathExtension extends \Twig_Extension
                 ? UrlGeneratorInterface::RELATIVE_PATH
                 : UrlGeneratorInterface::ABSOLUTE_PATH
         );
+    }
+
+    private function parametersResolver($alias = null)
+    {
+        if (null === $alias) {
+            return $this->parametersResolverRegistry->getDefault();
+        }
+        if (!$this->parametersResolverRegistry->has($alias)) {
+            throw new ParametersResolverDoesNotExist($alias);
+        }
+
+        return $this->parametersResolverRegistry->get($alias);
     }
 }
