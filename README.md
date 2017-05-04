@@ -1,5 +1,5 @@
 # BenatEspinaI18nRoutingBundle
-> Bundle that provides an abstraction layer over [JMSI18nRoutingBundle][1] to improve some features
+> Bundle that provides some missing features to complement the [JMSI18nRoutingBundle][1]
 
 SensioLabsInsight *TODO
 [![Build Status](https://travis-ci.org/benatespina/I18nRoutingBundle.svg?branch=master)](https://travis-ci.org/benatespina/I18nRoutingBundle)

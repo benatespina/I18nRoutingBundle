@@ -37,10 +37,10 @@ class RegistryParametersResolversPassSpec extends ObjectBehavior
     function it_does_not_process_when_service_does_not_have_any_alias(ContainerBuilder $container)
     {
         $container->hasDefinition(RegistryParametersResolversPass::SERVICE_ID)->shouldBeCalled()->willReturn(true);
-        $container->getParameter("benat_espina_i18n_routing.config")->shouldBeCalled()->willReturn([
+        $container->getParameter('benat_espina_i18n_routing.config')->shouldBeCalled()->willReturn([
             'default_parameters_resolver' => '',
         ]);
-        $container->findTaggedServiceIds("benat_espina_i18n_routing.parameters_resolver")
+        $container->findTaggedServiceIds('benat_espina_i18n_routing.parameters_resolver')
             ->shouldBeCalled()->willReturn([
                 'app.resolver.my_parameters_resolver' => [
                     [
@@ -58,10 +58,10 @@ class RegistryParametersResolversPassSpec extends ObjectBehavior
     function it_processes(ContainerBuilder $container, Definition $definition, Definition $definition2)
     {
         $container->hasDefinition(RegistryParametersResolversPass::SERVICE_ID)->shouldBeCalled()->willReturn(true);
-        $container->getParameter("benat_espina_i18n_routing.config")->shouldBeCalled()->willReturn([
+        $container->getParameter('benat_espina_i18n_routing.config')->shouldBeCalled()->willReturn([
             'default_parameters_resolver' => 'my_app',
         ]);
-        $container->findTaggedServiceIds("benat_espina_i18n_routing.parameters_resolver")
+        $container->findTaggedServiceIds('benat_espina_i18n_routing.parameters_resolver')
             ->shouldBeCalled()->willReturn([
                 'app.resolver.my_parameters_resolver'       => [
                     [
