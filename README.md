@@ -1,7 +1,7 @@
 # BenatEspinaI18nRoutingBundle
 > Bundle that provides some missing features to complement the [JMSI18nRoutingBundle][1]
 
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/66aaf1b9-c8bc-4d03-a831-3311630f5014/mini.png)](https://insight.sensiolabs.com/projects/66aaf1b9-c8bc-4d03-a831-3311630f5014)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/76bfad5f-e980-4307-9830-5b900c33b45c/mini.png)](https://insight.sensiolabs.com/projects/76bfad5f-e980-4307-9830-5b900c33b45c)
 [![Build Status](https://travis-ci.org/benatespina/I18nRoutingBundle.svg?branch=master)](https://travis-ci.org/benatespina/I18nRoutingBundle)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/benatespina/I18nRoutingBundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/benatespina/I18nRoutingBundle/?branch=master)
 [![Total Downloads](https://poser.pugx.org/benatespina/i18n-routing-bundle/downloads)](https://packagist.org/packages/benatespina/i18n-routing-bundle)
