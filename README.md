@@ -9,7 +9,8 @@
 [![Latest Unstable Version](https://poser.pugx.org/benatespina/i18n-routing-bundle/v/unstable.svg)](https://packagist.org/packages/benatespina/i18n-routing-bundle)
 
 ## Requirements
-PHP >= 7.0
+PHP >= 7.0</br>
+Symfony >= 3.0
 
 ## Installation
 The easiest way to install this bundle is using [Composer][2]
@@ -17,8 +18,10 @@ The easiest way to install this bundle is using [Composer][2]
 $ composer require benatespina/i18n-routing-bundle
 ```
 
-## Getting started
-TODO
+## Documentation
+All the documentation is stored in the `docs` folder.
+
+[Show me the docs!](docs/index.md)
 
 ## Tests
 This bundle is completely tested by **[PHPSpec][3], SpecBDD framework for PHP**.
