@@ -30,9 +30,13 @@ Run the following command to launch tests:
 ```bash
 $ vendor/bin/phpspec run -fpretty
 ```
+Also, you can easily start a simple application to test the features that the bundle provides.
+```bash
+$ tests/Application/bin/console server:start
+$ open http://127.0.0.1:8000
+```
 
 ## Contributing
-
 This bundle follows PHP coding standards, so pull requests need to execute the Fabien Potencier's [PHP-CS-Fixer][4].
 Furthermore, if the PR creates some not-PHP file remember that you have to put the license header manually. In order
 to simplify we provide a Composer script that wraps all the commands related with this process.
