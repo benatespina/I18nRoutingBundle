@@ -9,10 +9,12 @@
  * file that was distributed with this source code.
  */
 
+use Symfony\Component\Debug\Debug;
 use Symfony\Component\HttpFoundation\Request;
 use Tests\BenatEspina\I18nRoutingBundle\AppKernel;
 
 require_once __DIR__ . '/../../../vendor/autoload.php';
+Debug::enable();
 
 $kernel = new AppKernel('dev', true);
 $request = Request::createFromGlobals();
