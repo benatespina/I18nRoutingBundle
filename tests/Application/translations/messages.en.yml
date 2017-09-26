@@ -12,6 +12,7 @@ links:
     homepage: Homepage
     about_us: About Us
     contact: Contact
+    not_found: Not found page
 slugs:
     about_us: about-us
     contact: contact

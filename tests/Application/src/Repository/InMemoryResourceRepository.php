@@ -60,7 +60,7 @@ class InMemoryResourceRepository implements ResourceRepository
                 }
             }
         }
-        throw new ResourceDoesNotExistException();
+        return null;
     }
 
     private function checkTranslationsKeyExists($resource)

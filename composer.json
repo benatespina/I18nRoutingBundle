@@ -31,7 +31,8 @@
         "symfony/translation": "^3.2",
         "symfony/twig-bundle": "^3.2",
         "symfony/var-dumper": "^3.2",
-        "symfony/yaml": "^3.2"
+        "symfony/yaml": "^3.2",
+        "symfony/web-server-bundle": "^3.3"
     },
     "scripts": {
         "cs": [

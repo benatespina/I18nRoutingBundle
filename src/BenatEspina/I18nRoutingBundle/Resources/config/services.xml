@@ -18,7 +18,7 @@
         <service id="benat_espina_i18n_routing.resolver.parameters_resolver_registry"
                  class="BenatEspina\I18nRoutingBundle\Resolver\ParametersResolverRegistry">
             <argument/>
-            <argument type="service" on-invalid="null"/>
+            <argument type="service" on-invalid="null" id="null"/>
         </service>
 
         <service id="benat_espina_i18n_routing.twig.current_path_translation_extension"
@@ -27,8 +27,21 @@
             <argument type="service" id="request_stack"/>
             <argument type="service" id="router"/>
             <argument type="service" id="benat_espina_i18n_routing.resolver.parameters_resolver_registry"/>
+            <argument type="service" id="null"/>
 
             <tag name="twig.extension"/>
+        </service>
+
+        <service id="benat_espina_i18n_routing.resolver.not_found_locale.empty"
+                 class="BenatEspina\I18nRoutingBundle\Resolver\EmptyNotFoundLocaleResolver">
+        </service>
+
+        <service id="benat_espina_i18n_routing.event_listener.not_found_locale"
+                 class="BenatEspina\I18nRoutingBundle\EventListener\NotFoundLocaleListener"
+                 public="false">
+            <argument type="service" id="null"/>
+
+            <tag name="kernel.event_listener" event="kernel.exception" method="onSetLocale"/>
         </service>
 
     </services>

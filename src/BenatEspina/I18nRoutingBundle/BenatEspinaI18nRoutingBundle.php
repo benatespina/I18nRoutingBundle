@@ -12,6 +12,7 @@
 namespace BenatEspina\I18nRoutingBundle;
 
 use BenatEspina\I18nRoutingBundle\DependencyInjection\Compiler\RegistryParametersResolversPass;
+use BenatEspina\I18nRoutingBundle\DependencyInjection\Compiler\SetNotFoundLocaleResolverPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
@@ -23,5 +24,6 @@ class BenatEspinaI18nRoutingBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         $container->addCompilerPass(new RegistryParametersResolversPass());
+        $container->addCompilerPass(new SetNotFoundLocaleResolverPass());
     }
 }

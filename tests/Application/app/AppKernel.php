@@ -16,6 +16,7 @@ use JMS\I18nRoutingBundle\JMSI18nRoutingBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Bundle\TwigBundle\TwigBundle;
+use Symfony\Bundle\WebServerBundle\WebServerBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -25,6 +26,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Routing\RouteCollectionBuilder;
 use Tests\BenatEspina\I18nRoutingBundle\Repository\InMemoryResourceRepository;
+use Tests\BenatEspina\I18nRoutingBundle\Resolver\MyNotFoundLocaleResolver;
 use Tests\BenatEspina\I18nRoutingBundle\Resolver\MyParametersResolver;
 
 /**
@@ -101,6 +103,7 @@ class AppKernel extends Kernel
             new FrameworkBundle(),
             new JMSI18nRoutingBundle(),
             new TwigBundle(),
+            new WebServerBundle(),
         ];
     }
 
@@ -136,6 +139,12 @@ class AppKernel extends Kernel
                 ]
             )
         )->addTag('benat_espina_i18n_routing.parameters_resolver', ['alias' => 'my_app']);
+        $container->setDefinition(
+            'app.resolver.my_not_found_locale',
+            new Definition(
+                MyNotFoundLocaleResolver::class
+            )
+        )->addTag('benat_espina_i18n_routing.not_found_locale_resolver');
 
         $container->loadFromExtension('framework', [
             'secret'     => 'sd87cb6cb49c248cn3cnn439cn498ds0210sad2',

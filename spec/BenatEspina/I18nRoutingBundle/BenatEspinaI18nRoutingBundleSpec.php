@@ -13,6 +13,7 @@ namespace spec\BenatEspina\I18nRoutingBundle;
 
 use BenatEspina\I18nRoutingBundle\BenatEspinaI18nRoutingBundle;
 use BenatEspina\I18nRoutingBundle\DependencyInjection\Compiler\RegistryParametersResolversPass;
+use BenatEspina\I18nRoutingBundle\DependencyInjection\Compiler\SetNotFoundLocaleResolverPass;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
@@ -31,6 +32,7 @@ class BenatEspinaI18nRoutingBundleSpec extends ObjectBehavior
     function it_builds(ContainerBuilder $container)
     {
         $container->addCompilerPass(new RegistryParametersResolversPass())->shouldBeCalled();
+        $container->addCompilerPass(new SetNotFoundLocaleResolverPass())->shouldBeCalled();
         $this->build($container);
     }
 }

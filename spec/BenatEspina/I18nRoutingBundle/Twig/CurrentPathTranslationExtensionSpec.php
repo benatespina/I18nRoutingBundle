@@ -11,8 +11,8 @@
 
 namespace spec\BenatEspina\I18nRoutingBundle\Twig;
 
+use BenatEspina\I18nRoutingBundle\Resolver\NotFoundLocaleResolver;
 use BenatEspina\I18nRoutingBundle\Resolver\ParametersResolver;
-use BenatEspina\I18nRoutingBundle\Resolver\ParametersResolverDoesNotExist;
 use BenatEspina\I18nRoutingBundle\Resolver\ParametersResolverRegistry;
 use BenatEspina\I18nRoutingBundle\Twig\CurrentPathTranslationExtension;
 use PhpSpec\ObjectBehavior;
@@ -25,9 +25,13 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
  */
 class CurrentPathTranslationExtensionSpec extends ObjectBehavior
 {
-    function let(RequestStack $requestStack, UrlGeneratorInterface $urlGenerator, ParametersResolverRegistry $registry)
-    {
-        $this->beConstructedWith($requestStack, $urlGenerator, $registry);
+    function let(
+        RequestStack $requestStack,
+        UrlGeneratorInterface $urlGenerator,
+        ParametersResolverRegistry $registry,
+        NotFoundLocaleResolver $notFoundLocaleResolver
+    ) {
+        $this->beConstructedWith($requestStack, $urlGenerator, $registry, $notFoundLocaleResolver);
     }
 
     function it_gets_functions()
@@ -60,14 +64,17 @@ class CurrentPathTranslationExtensionSpec extends ObjectBehavior
     function it_does_no_build_current_path_translation_when_parameters_resolver_does_not_exist(
         RequestStack $requestStack,
         Request $request,
-        ParametersResolverRegistry $registry
+        ParametersResolverRegistry $registry,
+        NotFoundLocaleResolver $notFoundLocaleResolver
     ) {
         $requestStack->getMasterRequest()->shouldBeCalled()->willReturn($request);
         $request->getLocale()->shouldBeCalled()->willReturn('es');
         $request->get('_route')->shouldBeCalled()->willReturn('page_route');
         $request->get('_route_params')->shouldBeCalled()->willReturn(['slug' => 'the-slug']);
         $registry->has('unknown-alias')->shouldBeCalled()->willReturn(false);
-        $this->shouldThrow(ParametersResolverDoesNotExist::class)->duringCurrentPathTranslation('en', 'unknown-alias');
+        $notFoundLocaleResolver->generateUrl($request, 'es', 'en')->shouldBeCalled()->willReturn('/en/unknown-alias');
+
+        $this->currentPathTranslation('en', 'unknown-alias')->shouldReturn('/en/unknown-alias');
     }
 
     function it_builds_current_path_translation_with_explicit_alias(

@@ -12,6 +12,7 @@ links:
     homepage: Inicio
     about_us: Sobre nosotros
     contact: Contacto
+    not_found: Página no encontrada
 slugs:
     about_us: sobre-nosotros
     contact: contacto

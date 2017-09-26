@@ -11,6 +11,7 @@
 
 namespace BenatEspina\I18nRoutingBundle\Twig;
 
+use BenatEspina\I18nRoutingBundle\Resolver\NotFoundLocaleResolver;
 use BenatEspina\I18nRoutingBundle\Resolver\ParametersResolverDoesNotExist;
 use BenatEspina\I18nRoutingBundle\Resolver\ParametersResolverRegistry;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -24,15 +25,18 @@ class CurrentPathTranslationExtension extends \Twig_Extension
     private $requestStack;
     private $urlGenerator;
     private $parametersResolverRegistry;
+    private $notFoundLocaleResolver;
 
     public function __construct(
         RequestStack $requestStack,
         UrlGeneratorInterface $urlGenerator,
-        ParametersResolverRegistry $parametersResolverRegistry
+        ParametersResolverRegistry $parametersResolverRegistry,
+        NotFoundLocaleResolver $notFoundLocaleResolver
     ) {
         $this->requestStack = $requestStack;
         $this->urlGenerator = $urlGenerator;
         $this->parametersResolverRegistry = $parametersResolverRegistry;
+        $this->notFoundLocaleResolver = $notFoundLocaleResolver;
     }
 
     public function getFunctions()
@@ -51,15 +55,21 @@ class CurrentPathTranslationExtension extends \Twig_Extension
         $parameters = $request->get('_route_params');
         $parameters['_locale'] = $newLocale;
 
-        $this->parametersResolver($parametersResolverAlias)->resolve($locale, $newLocale, $parameters);
+        try {
+            $this->parametersResolver($parametersResolverAlias)->resolve($locale, $newLocale, $parameters);
 
-        return $this->urlGenerator->generate(
-            $name,
-            $parameters,
-            $relative
-                ? UrlGeneratorInterface::RELATIVE_PATH
-                : UrlGeneratorInterface::ABSOLUTE_PATH
-        );
+            $url = $this->urlGenerator->generate(
+                $name,
+                $parameters,
+                $relative
+                    ? UrlGeneratorInterface::RELATIVE_PATH
+                    : UrlGeneratorInterface::ABSOLUTE_PATH
+            );
+        } catch (\Exception $exception) {
+            $url = $this->notFoundLocaleResolver->generateUrl($request, $locale, $newLocale);
+        }
+
+        return $url;
     }
 
     private function parametersResolver($alias = null)

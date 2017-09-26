@@ -114,7 +114,7 @@ class AwesomeParametersResolver implements ParametersResolver
 
         $page = $pageTranslation->getPage();
         $translation = $page->getTranslation($toLocale);
-        if (!translation) {
+        if (!$translation) {
             throw new \Exception(sprintf(
                 'Does not exist any translation to the given %s locale',
                 $toLocale
