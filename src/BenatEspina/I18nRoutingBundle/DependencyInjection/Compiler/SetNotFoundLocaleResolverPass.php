@@ -35,17 +35,6 @@ class SetNotFoundLocaleResolverPass implements CompilerPassInterface
         }
         $services = $container->findTaggedServiceIds('benat_espina_i18n_routing.not_found_locale_resolver');
 
-        if (0 === count($services)) {
-            $container->findDefinition($serviceId)->replaceArgument(
-                0,
-                $container->getDefinition(
-                    'benat_espina_i18n_routing.resolver.not_found_locale.empty'
-                )
-            );
-
-            return;
-        }
-
         if (count($services) > 1) {
             throw new \LogicException(
                 'Only one service can have the "benat_espina_i18n_routing.not_found_locale_resolver" tag.'
