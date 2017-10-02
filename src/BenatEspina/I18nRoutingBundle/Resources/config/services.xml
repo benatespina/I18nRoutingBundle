@@ -37,9 +37,8 @@
         </service>
 
         <service id="benat_espina_i18n_routing.event_listener.not_found_locale"
-                 class="BenatEspina\I18nRoutingBundle\EventListener\NotFoundLocaleListener"
-                 public="false">
-            <argument type="service" id="null"/>
+                 class="BenatEspina\I18nRoutingBundle\EventListener\NotFoundLocaleListener">
+            <argument type="service" id="benat_espina_i18n_routing.resolver.not_found_locale.empty"/>
 
             <tag name="kernel.event_listener" event="kernel.exception" method="onSetLocale"/>
         </service>
