@@ -34,7 +34,7 @@ class SetNotFoundLocaleResolverPass implements CompilerPassInterface
             return;
         }
         $services = $container->findTaggedServiceIds('benat_espina_i18n_routing.not_found_locale_resolver');
-        if (count($services) > 0) {
+        if (count($services) === 0) {
             return;
         }
 
